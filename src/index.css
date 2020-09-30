@@ -1,0 +1,41 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-app-region: drag;
+  user-select: none;
+  opacity: 0.75;
+}
+
+.window {
+  width: 200px;
+  overflow: hidden;
+  background: #aaa;
+  text-align: center;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 2em 0;
+}
+
+.got-access .window {
+  background: chartreuse;
+}
+
+.high-warning .window {
+  background: red;
+}
+
+p {
+  display: none;
+}
+
+.asking-access .awaiting {
+  display: block;
+}
+.got-access .normal {
+  display: block;
+}
+.high-warning .normal {
+  display: none;
+}
+.high-warning .high {
+  display: block;
+}
