@@ -43,7 +43,12 @@ ipcRenderer.on('info2', function (event, data) {
       var audioContext = new AudioContext();
       var analyser = audioContext.createAnalyser();
       var microphone = audioContext.createMediaStreamSource(stream);
-      var javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
+      var javascriptNode = audioContext.createScriptProcessor(256, 1, 1);
+
+      var filter = audioContext.createBiquadFilter();
+      filter.type = "highpass";
+      filter.frequency.value = 0.0001;
+      filter.connect(analyser);
 
       analyser.smoothingTimeConstant = 0.8;
       analyser.fftSize = 1024;
@@ -62,8 +67,14 @@ ipcRenderer.on('info2', function (event, data) {
         }
 
         var average = values / length;
+        var sqr_average = Math.sqrt(average);
+        // console.log(analyser.frequencyBinCount);
+        // console.log(array);
+        // console.log(values);
+        // console.log(average);
+        // console.log(sqr_average);
 
-        if (values > 20000) {
+        if (sqr_average > 10) {
           document.body.classList.add("high-warning");
         } else {
           document.body.classList.remove("high-warning");
